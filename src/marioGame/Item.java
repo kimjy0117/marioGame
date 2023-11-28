@@ -66,7 +66,7 @@ public class Item extends JLabel{
 	}
 	
 	private boolean collision() {
-		Rectangle playerRec = new Rectangle(player_x, player_y, 40, 40);
+		Rectangle playerRec = new Rectangle(player_x+5, player_y+5, 30, 30);
 		Rectangle itemRec = new Rectangle(this.x, this.y, 30, 30);
 		
 		if (playerRec.intersects(itemRec)) {

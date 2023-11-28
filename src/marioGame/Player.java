@@ -157,8 +157,8 @@ public class Player extends JLabel implements Moveable {
 	
 	public void setStatus(int status) {
 		this.status += status;
-		if(status > 2)
-			status = 2;
+		if(this.status > 2)
+			this.status = 2;
 		transPlayer();
 	}
 
@@ -204,7 +204,7 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	public void leftInterrupt() {
-		if(leftThread.isAlive()) {
+		if(leftThread != null && leftThread.isAlive()) {
 			leftThread.interrupt();
 			left = false;
 		}
@@ -250,7 +250,7 @@ public class Player extends JLabel implements Moveable {
 		rightThread.start();
 	}
 	public void rightInterrupt() {
-		if(rightThread.isAlive()) {
+		if(rightThread != null && rightThread.isAlive()) {
 			rightThread.interrupt();
 			right = false;
 		}
@@ -286,7 +286,7 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	public void upInterrupt() {
-		if(upThread.isAlive()) {
+		if(upThread != null && upThread.isAlive()) {
 			upThread.interrupt();
 			up = false;
 		}
@@ -316,7 +316,6 @@ public class Player extends JLabel implements Moveable {
 					}
 				}
 				//이전의 방향에 따라 캐릭터 이미지 변경
-				//setIcon(playerR);
 				if(lastLR) {
 					setIcon(playerL);
 				}
@@ -330,7 +329,7 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	public void downInterrupt() {
-		if(downThread.isAlive()) {
+		if(downThread != null && downThread.isAlive()) {
 			downThread.interrupt();
 			down = false;
 			//down중간에 인터루프트를 할 경우 착지 상태 이미지를 넣어준다.

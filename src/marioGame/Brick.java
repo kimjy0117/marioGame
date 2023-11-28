@@ -15,6 +15,7 @@ public class Brick extends JLabel{
 	
 	//벽돌 이미지
 	private ImageIcon brick = new ImageIcon("images/mario_brick.png");
+	private ImageIcon brokenBrick = new ImageIcon("images/mario_brokenBrick.png");
 	
 	//플레이어
 	private Player player;
@@ -25,7 +26,6 @@ public class Brick extends JLabel{
 	
 	public Brick(int x, int y, Player player) {
 		init(x, y, player);
-//		collision();
 	}
 	
 	private void init(int x, int y, Player player) {
@@ -63,10 +63,16 @@ public class Brick extends JLabel{
 	public boolean check(){
 		if (status) {
 			//player의 위치가 블럭 하단보다 초과할 경우 블럭 제거
-			if (player_x+40 > x + 5 && player_x < x + size - 5 && player_y < y + size && player_y > y + 35) {
+			if (player_x+40 > x + 6 && player_x < x + size - 6 && player_y < y + size && player_y > y + 35) {
 				player.upInterrupt();
 				player.down();
 				status = false;
+				setIcon(brokenBrick);
+				try {
+					Thread.sleep(70);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				setSize(0, 0);
 			}
 			//오른쪽에서 충돌시 right인터루프트 실행

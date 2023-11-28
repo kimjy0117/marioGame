@@ -70,7 +70,7 @@ public class Pipe extends JLabel{
 			player.leftInterrupt();
 			return true;
 		}
-		else if(player_x+40 > x && player_x < x + wSize && player_y+40 == y) {
+		else if(player_x+40 > x+3 && player_x < x + wSize-3 && player_y+40 == y) {
 			//down상태일 때만 down을 인터루프트 해준다
 			if(player.isDown()) {
 				player.downInterrupt();

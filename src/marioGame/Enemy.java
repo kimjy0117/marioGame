@@ -172,8 +172,7 @@ public class Enemy extends JLabel implements Moveable {
 					player.setStatus(-1);
 					System.out.println("충돌");
 					try {
-						//출돌 후 2초 무적
-						Thread.sleep(2000);
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

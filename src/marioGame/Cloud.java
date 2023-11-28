@@ -1,5 +1,5 @@
 package marioGame;
 
-public class Intro {
+public class Cloud {
 
 }
