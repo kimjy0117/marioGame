@@ -8,11 +8,11 @@ public class BigEnemy extends JLabel {
 	private int x;
 	private int y;
 
-	//캐릭터 이동 속도
+	//몬스터 이동 속도
 	private final int UPDOWNSPEED = 2;
 	private int speed;
 	
-	//캐릭터 이미지
+	//몬스터 이미지
 	private ImageIcon BigEnemyR, BigEnemyL;
 	
 	//플레이어
@@ -22,7 +22,7 @@ public class BigEnemy extends JLabel {
 	private int player_x;
 	private int player_y;
 	
-	//캐릭터위치 - 플레이어 위치 (거리)
+	//몬스터위치 - 플레이어 위치 (거리)
 	private double distance_x;
 	
 	public BigEnemy(int x, int y, int speed ,Player player) {
@@ -46,7 +46,6 @@ public class BigEnemy extends JLabel {
 		
 		checkCollision();
 		upDown();
-//		moving();
 	}
 	
 	public void upDown() { 
@@ -109,7 +108,6 @@ public class BigEnemy extends JLabel {
 				//충돌할 경우 플레이어의 status -1을 해줌
 				if(collision()) {
 					player.setStatus(-1);
-					System.out.println("충돌");
 					try {
 						//출돌 후 잠시 무적
 						Thread.sleep(500);

@@ -18,10 +18,10 @@ public class Enemy extends JLabel implements Moveable {
 	//마지막으로 움직인 좌우 판별
 	private boolean lastLR;
 	
-	//캐릭터 속도
+	//몬스터 속도
 	private final int SPEED = 2;
 	
-	//캐릭터 이미지
+	//몬스터 이미지
 	private ImageIcon enemyR, enemyL;
 	
 	//플레이어
@@ -36,23 +36,18 @@ public class Enemy extends JLabel implements Moveable {
 	private Thread rightThread;
 	
 	public Enemy(int x, int y, int time ,Player player) {
-		initRL();
 		initSetting(x, y, time, player);
 	}
 
-	private void initRL() {
+	private void initSetting(int x, int y, int time, Player player) {
 		enemyR = new ImageIcon("images/mario_enemy_R.png");
 		enemyL = new ImageIcon("images/mario_enemy_L.png");
-	}
-
-	private void initSetting(int x, int y, int time, Player player) {
 		this.x = x;
 		this.y = y;
 		this.time = time;
 		this.player = player;
 		this.player_x = player.isLocationX();
 		this.player_y = player.isLocationY();
-		
 		left = false;
 		right = false;	
 
@@ -61,7 +56,6 @@ public class Enemy extends JLabel implements Moveable {
 		setLocation(x, y);
 		
 		checkCollision();
-		
 		moving();
 	}
 	
@@ -170,7 +164,6 @@ public class Enemy extends JLabel implements Moveable {
 				//충돌할 경우 플레이어의 status -1을 해줌
 				if(collision()) {
 					player.setStatus(-1);
-					System.out.println("충돌");
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {

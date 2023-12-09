@@ -8,11 +8,11 @@ public class FlyEnemy extends JLabel {
 	private int x;
 	private int y;
 
-	//캐릭터 이동 속도
+	//몬스터 이동 속도
 	private final int UPDOWNSPEED = 1;
 	private int speed;
 	
-	//캐릭터 이미지
+	//몬스터 이미지
 	private ImageIcon flyEnemyR, flyEnemyL;
 	
 	//플레이어
@@ -22,7 +22,7 @@ public class FlyEnemy extends JLabel {
 	private int player_x;
 	private int player_y;
 	
-	//캐릭터위치 - 플레이어 위치 (거리)
+	//몬스터위치 - 플레이어 위치 (거리)
 	private double distance_x;
 	private double distance_y;
 	
@@ -56,31 +56,31 @@ public class FlyEnemy extends JLabel {
 	}
 	
 	public void upDown() { 
-	new Thread(()->{
-		while(player.isStatus()>0) {
-			for(int i=0; i<20; i++) {
-				y += UPDOWNSPEED;
-				setLocation(x, y);
-				try {
-					//내려오는 속도를 감소시킴
-					Thread.sleep(15+i);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+		new Thread(()->{
+			while(player.isStatus()>0) {
+				for(int i=0; i<20; i++) {
+					y += UPDOWNSPEED;
+					setLocation(x, y);
+					try {
+						//내려오는 속도를 감소시킴
+						Thread.sleep(15+i);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				for(int i=0; i<20; i++) {
+					y -= UPDOWNSPEED;
+					setLocation(x, y);
+					try {
+						//올라가는 속도를 감소시킴
+						Thread.sleep(15+i);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
-			
-			for(int i=0; i<20; i++) {
-				y -= UPDOWNSPEED;
-				setLocation(x, y);
-				try {
-					//올라가는 속도를 감소시킴
-					Thread.sleep(15+i);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}).start();
+		}).start();
 	}
 	
 	private void moving() {
@@ -112,36 +112,28 @@ public class FlyEnemy extends JLabel {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				
+				checkCollision();
 			}
 		}).start();
 	}
 	
 	private void checkCollision() {
-		new Thread(()->{
-			while(player.isStatus()>0) {
-				//player의 위치 값이 변수에 저장되도록 함
-				synchronized(player) {
-					player_x = player.isLocationX();
-					player_y = player.isLocationY();
-				}
-				//충돌할 경우 플레이어의 status -1을 해줌
-				if(collision()) {
-					player.setStatus(-1);
-					System.out.println("충돌");
-					try {
-						//출돌 후 1초 무적
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				try {
-					Thread.sleep(5);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		//player의 위치 값이 변수에 저장되도록 함
+		synchronized(player) {
+			player_x = player.isLocationX();
+			player_y = player.isLocationY();
+		}
+		//충돌할 경우 플레이어의 status -1을 해줌
+		if(collision()) {
+			player.setStatus(-1);
+			try {
+				//출돌 후 1초 무적
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		}).start();
+		}
 	}
 	
 	private boolean collision() {

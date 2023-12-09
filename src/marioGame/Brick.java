@@ -14,8 +14,8 @@ public class Brick extends JLabel{
 	private boolean status;
 	
 	//벽돌 이미지
-	private ImageIcon brick = new ImageIcon("images/mario_brick.png");
-	private ImageIcon brokenBrick = new ImageIcon("images/mario_brokenBrick.png");
+	private ImageIcon brick;
+	private ImageIcon brokenBrick;
 	
 	//플레이어
 	private Player player;
@@ -29,6 +29,8 @@ public class Brick extends JLabel{
 	}
 	
 	private void init(int x, int y, Player player) {
+		brick = new ImageIcon("images/mario_brick.png");
+		brokenBrick = new ImageIcon("images/mario_brokenBrick.png");
 		status = true;
 		size = 40;
 		this.x = x;
@@ -36,9 +38,11 @@ public class Brick extends JLabel{
 		this.player = player;
 		player_x = player.isLocationX();
 		player_y = player.isLocationX();
+		
 		setIcon(brick);
 		setSize(size, size);
 		setLocation(x, y);
+		
 		collision();
 	}
 	
@@ -54,7 +58,7 @@ public class Brick extends JLabel{
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					return;
 				}
 			}
 		}).start();
@@ -86,7 +90,7 @@ public class Brick extends JLabel{
 				return true;
 			}
 			//윗쪽에서 충돌시 down인터루프트 실행
-			else if(player_x+40 > x && player_x < x + size && player_y+40 == y) {
+			else if(player_x+40-3 > x && player_x+3 < x + size && player_y+40 == y) {
 				//down상태일 때만 down을 인터루프트 해준다
 				if(player.isDown()) {
 					player.downInterrupt();

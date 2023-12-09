@@ -22,11 +22,21 @@ public class Pipe extends JLabel{
 	private int player_y;
 	
 	public Pipe(int x, int y, Player player) {
+		init(x, y, player);
+		collision();
+	}
+	
+	private void init(int x, int y, Player player) {
+		this.player = player;
 		this.x = x;
 		this.y = y;
-		this.player = player;
-		init();
-		collision();
+		wSize = 55;
+		hSize = 70;
+		player_x = 50;
+		player_y = 670;
+		setIcon(pipe);
+		setSize(wSize, hSize);
+		setLocation(x, y);
 	}
 	
 	private void collision() {
@@ -47,16 +57,6 @@ public class Pipe extends JLabel{
 		}).start();
 	}
 	
-	private void init() {
-		wSize = 55;
-		hSize = 70;
-		player_x = 50;
-		player_y = 670;
-		setIcon(pipe);
-		setSize(wSize, hSize);
-		setLocation(x, y);
-	}
-	
 	public boolean check(){
 		if (player_x+40 > x && player_x < x + wSize && player_y < y + hSize && player_y > y + 35) {
 			player.upInterrupt();
@@ -64,13 +64,15 @@ public class Pipe extends JLabel{
 		}
 		else if(player_x+40 >= x && player_x+40<x+wSize/2 && player_y < y + hSize && player_y+40 > y) {
 			player.rightInterrupt();
+			player.setLocation(x-40, player.isLocationY());
 			return true;
 		}
 		else if(player_x <= x+wSize && player_x >= x+wSize/2 && player_y < y + hSize && player_y+40 > y) {
 			player.leftInterrupt();
+			player.setLocation(x+wSize, player.isLocationY());
 			return true;
 		}
-		else if(player_x+40 > x+3 && player_x < x + wSize-3 && player_y+40 == y) {
+		else if(player_x+40 > x && player_x < x + wSize && player_y+40 == y) {
 			//down상태일 때만 down을 인터루프트 해준다
 			if(player.isDown()) {
 				player.downInterrupt();

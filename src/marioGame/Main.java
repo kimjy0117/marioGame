@@ -7,9 +7,15 @@ import javax.swing.*;
 public class Main extends JFrame{
 	//배경
 	private JLabel backgroundImg;
+	//구름
+	private Cloud cloud1;
+	private Cloud cloud2;
+	private Cloud cloud3;
+	private Cloud cloud4;
 	//플레이어
 	public Player player;
-
+	//피치
+	private Peach peach;
 	//아이템
 	private Item item;
 	//적
@@ -21,6 +27,8 @@ public class Main extends JFrame{
 	private FlyEnemy flyEnemy1;
 	private FlyEnemy flyEnemy2;
 	private FlyEnemy flyEnemy3;
+	private FlyEnemy flyEnemy4;
+	private FlyEnemy flyEnemy5;
 	private BigEnemy bigEnemy;
 	//장애물
 	private Brick brick1;
@@ -37,8 +45,8 @@ public class Main extends JFrame{
 	private int map;
 	//게임 종료 판별
 	private boolean finish;
-	//캐릭터 상태 쓰레드
-	private Thread checkThread;
+	//몇 번 죽었는지
+	private int deathCount = 0;
 	//시간
 	private long playTime = 0;
 	private long startTime = 0;
@@ -52,7 +60,7 @@ public class Main extends JFrame{
 	
 	private void frameSetting() {
 	    //프레임 설정
-		setTitle("MARIO GAME");
+		setTitle("MARIO GAME USer");
 		setSize(1500, 800);
         setResizable(false);// 프레임의 크기를 조절하지 못하게 설정
 		setLayout(null); //자유롭게 그림을 그릴 수 있게 해준다.
@@ -69,6 +77,16 @@ public class Main extends JFrame{
 	    //플레이어 생성
 		player = new Player();
 		add(player);
+		
+		//구름 생성
+		cloud1 = new Cloud(50, 30, 2, player);
+		cloud2 = new Cloud(200, 170, 1, player);
+		cloud3 = new Cloud(600, 120, 2, player);
+		cloud4 = new Cloud(1000, 80, 1, player);
+		add(cloud1);
+		add(cloud2);
+		add(cloud3);
+		add(cloud4);
 		
 		//적 생성
 		enemy1 = new Enemy(300, 680, 2300, player);
@@ -108,7 +126,6 @@ public class Main extends JFrame{
 		
 		checkDown();
 		checkFinish();
-		checkStatus();
 		setVisible(true);
 	}
 	
@@ -118,6 +135,16 @@ public class Main extends JFrame{
 	    //플레이어 생성
 		player = new Player();
 		add(player);
+		
+		//구름 생성
+		cloud1 = new Cloud(50, 30, 2, player);
+		cloud2 = new Cloud(200, 170, 1, player);
+		cloud3 = new Cloud(600, 120, 2, player);
+		cloud4 = new Cloud(1000, 80, 1, player);
+		add(cloud1);
+		add(cloud2);
+		add(cloud3);
+		add(cloud4);
 		
 		//적 생성
 		enemy1 = new Enemy(600, 680, 6000, player);
@@ -132,9 +159,9 @@ public class Main extends JFrame{
 		add(enemy5);
 		
 		//플라잉 적 생성
-		flyEnemy1 = new FlyEnemy(1200, 500, 4, player);
-		flyEnemy2 = new FlyEnemy(200, 100, 3, player);
-		flyEnemy3 = new FlyEnemy(800, 300, 3, player);
+		flyEnemy1 = new FlyEnemy(200, 100, 3, player);
+		flyEnemy2 = new FlyEnemy(800, 300, 3, player);
+		flyEnemy3 = new FlyEnemy(1200, 600, 2, player);
 		add(flyEnemy1);
 		add(flyEnemy2);
 		add(flyEnemy3);
@@ -155,7 +182,6 @@ public class Main extends JFrame{
 		
 		checkDown();
 		checkFinish();
-		checkStatus();
 		setVisible(true);
 	}
 	
@@ -165,29 +191,51 @@ public class Main extends JFrame{
 	    //플레이어 생성
 		player = new Player();
 		add(player);
+
+		//구름 생성
+		cloud1 = new Cloud(50, 30, 2, player);
+		cloud2 = new Cloud(200, 170, 1, player);
+		cloud3 = new Cloud(600, 120, 2, player);
+		cloud4 = new Cloud(1000, 80, 1, player);
+		add(cloud1);
+		add(cloud2);
+		add(cloud3);
+		add(cloud4);
 		
 		//적 생성
-		enemy1 = new Enemy(800, 680, 6000, player);
-		enemy2 = new Enemy(600, 680, 3000, player);
-		enemy3 = new Enemy(1000, 680, 4000, player);
+		enemy1 = new Enemy(300, 680, 2000, player);
+		enemy2 = new Enemy(800, 680, 6000, player);
+		enemy3 = new Enemy(600, 680, 3000, player);
+		enemy4 = new Enemy(1000, 680, 4000, player);
+		enemy5 = new Enemy(1200, 680, 2000, player);
 		add(enemy1);
 		add(enemy2);
 		add(enemy3);
+		add(enemy4);
+		add(enemy5);
 		
 		flyEnemy1 = new FlyEnemy(1100, 650, 2, player);
 		flyEnemy2 = new FlyEnemy(320, 100, 3, player);
-		flyEnemy3 = new FlyEnemy(800, 400, 4, player);
+		flyEnemy3 = new FlyEnemy(800, 400, 2, player);
+		flyEnemy4 = new FlyEnemy(900, 500, 3, player);
+		flyEnemy5 = new FlyEnemy(1300, 300, 2, player);
 		add(flyEnemy1);
 		add(flyEnemy2);
 		add(flyEnemy3);
+		add(flyEnemy4);
+		add(flyEnemy5);
 		
 		//보스 생성
 		bigEnemy = new BigEnemy(1200, 600, 1, player);
 		add(bigEnemy);
 		
+		//피치 생성
+		peach = new Peach(1307, 643);
+		add(peach);
+		
 		//벽돌 생성
 		brick1 = new Brick(50, 570, player);
-		brick2 = new Brick(300, 540, player);
+		brick2 = new Brick(300, 550, player);
 		brick3 = new Brick(400, 460, player);
 		brick4 = new Brick(500, 380, player);
 		brick5 = new Brick(600, 300, player);
@@ -215,18 +263,16 @@ public class Main extends JFrame{
 		
 		checkDown();
 		checkFinish();
-		checkStatus();
 		setVisible(true);
 	}
 	
-    private void reGame() {
-    	System.out.println("맵1 실행");
+    private synchronized void reGame() {
         // finish 값을 다시 false로 설정
         finish = false;
         // 기존의 컴포넌트들을 제거
         map = 1;
+        deathCount++;
         getContentPane().removeAll();
-        System.out.println("기존의 컴포넌트 제거");
         map1Init();
         // 프레임을 다시 그리도록 요청
         revalidate();
@@ -234,13 +280,11 @@ public class Main extends JFrame{
     }
     
     private void map2Game() {
-    	System.out.println("맵2 실행");
     	// finish 값을 다시 false로 설정
         finish = false;
         map = 2;
         // 기존의 컴포넌트들을 제거
         getContentPane().removeAll();
-        System.out.println("기존의 컴포넌트 제거");
         map2Init();
         // 프레임을 다시 그리도록 요청
         revalidate();
@@ -248,19 +292,17 @@ public class Main extends JFrame{
     }
     
     private void map3Game() {
-    	System.out.println("맵3 실행");
         // finish 값을 다시 false로 설정
         finish = false;
         map = 3;
         // 기존의 컴포넌트들을 제거
         getContentPane().removeAll();
-        System.out.println("기존의 컴포넌트 제거");
         map3Init();
         // 프레임을 다시 그리도록 요청
         revalidate();
         repaint();
     }
-	
+    
 	private void initListener() {
 		addKeyListener(new KeyAdapter() {
 			@Override
@@ -305,7 +347,7 @@ public class Main extends JFrame{
 	}
 	
 	//벽돌 밖으로 나갈 경우 떨어지게 함
-	private void checkDown() {
+	private synchronized void checkDown() {
 		new Thread(()->{
 			while(!finish && player.isStatus()>0) {
 				if(brick1.check() && brick2.check() && brick3.check() && brick4.check() && brick5.check() && 
@@ -327,20 +369,28 @@ public class Main extends JFrame{
 	private void checkFinish() {
 		new Thread(()->{
 			while(!finish && player.isStatus()>0) {
-				if(player.isLocationX()>1300 && player.isLocationX()<1305 && player.isLocationY()>630) {
+				if(player.isLocationX()>1290 && player.isLocationX()<1315 && player.isLocationY()>550) {
 					finish = true;
-					checkStatusInterrupt();
 					player.setStatus(0);
-					System.out.println("피니쉬");
 					if(map == 1) {
 						map2Game();
+						return;
 					}
 					else if(map == 2) {
 						map3Game();
+						return;
 					}
 					else if(map == 3) {
-						System.out.println("게임 클리어");
 						map = 4;
+	                    try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+	                    // 엔딩창 키기
+	                    new Ending(playTime, deathCount);
+	                    dispose();
+						return;
 						
 					}
 					try {
@@ -355,31 +405,11 @@ public class Main extends JFrame{
 					e.printStackTrace();
 				}
 			}
-		}).start();
-	}
-	
-	private void checkStatus() {
-		checkThread = new Thread(()->{
-			while(player.isStatus()>0) {
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					return;
-				}
+			if(!finish) {
+	            // 게임 재시작
+	            reGame();
 			}
-            System.out.println("게임 종료");
-            // 게임 재시작
-            reGame();
-		});
-		checkThread.start();
-	}
-	
-	//checkStatus 강제로 종료시킴
-	public void checkStatusInterrupt() {
-		if(checkThread.isAlive()) {
-			checkThread.interrupt();
-			System.out.println("쓰레드 죽임");
-		}
+		}).start();
 	}
 	
 	private void timer() {
@@ -388,13 +418,12 @@ public class Main extends JFrame{
 		new Thread(()->{
 			while(map != 4) {
 				playTime = System.currentTimeMillis() - startTime ;
-				System.out.println(playTime/1000);
 				try {
-                    Thread.sleep(1000); // 1초 동안 일시 중지
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 			}
 		}).start();
-	}
+	}	
 }

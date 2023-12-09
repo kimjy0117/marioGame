@@ -26,14 +26,13 @@ public class Item extends JLabel{
 	}
 
 	private void initSetting(int x, int y, Player player) {
+		item = new ImageIcon("images/mario_item.png");	
 		status = true;
 		this.x = x;
 		this.y = y;
 		this.player = player;
 		this.player_x = player.isLocationX();
 		this.player_y = player.isLocationY();
-		
-		item = new ImageIcon("images/mario_item.png");	
 
 		setIcon(item);
 		setSize(30, 30);
@@ -54,7 +53,6 @@ public class Item extends JLabel{
 					status = false;
 					setSize(0, 0);
 					player.setStatus(+1);
-					System.out.println("아이템 획득");
 				}
 				try {
 					Thread.sleep(1);

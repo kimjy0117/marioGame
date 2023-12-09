@@ -87,10 +87,7 @@ public class Player extends JLabel implements Moveable {
 	
 	//status에 따라 캐릭터의 이미지 변화
 	private void transPlayer() {
-		if(status == 0) {
-			System.out.println("게임종료");
-		}
-		else if(status == 1) {
+		if(status == 1) {
 			initNormal();
 		}
 		else if(status == 2) {
@@ -155,7 +152,7 @@ public class Player extends JLabel implements Moveable {
 		down = b;
 	}
 	
-	public void setStatus(int status) {
+	public synchronized void setStatus(int status) {
 		this.status += status;
 		if(this.status > 2)
 			this.status = 2;
@@ -163,7 +160,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public void left() {
+	public synchronized void left() {
 		setIcon(playerL);
 		lastLR = true;
 		left = true;
@@ -211,7 +208,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public void right() {
+	public synchronized void right() {
 		setIcon(playerR);
 		lastLR = false;
 		right = true;
@@ -257,7 +254,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public void up() {
+	public synchronized void up() {
 		up = true; 
 		upThread = new Thread(()->{
 			setIcon(playerJR);
@@ -293,11 +290,10 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public void down() {
+	public synchronized void down() {
 		if (!down) {
 			down = true;
 			downThread = new Thread(()->{
-				System.out.println("다운 실행");
 				for(int i=0; i<300; i++) {
 					y += JUMPSPEED;
 					//y좌표가 바닥보다 커질 경우 플레이어의 y좌표를 670으로 고정
