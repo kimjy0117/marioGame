@@ -1,6 +1,6 @@
 package marioGame;
 
-public class Landing{		
+public class Start{		
     public static void main(String[] args) {
     	new GameIntro();
     }
