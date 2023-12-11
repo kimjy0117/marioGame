@@ -260,22 +260,16 @@ public class MainLearning extends JFrame{
 				//랜덤한 시간 생성후 리스트에 저장
     			rightSleepTime = random.nextInt(1000);
     			pressRightTime = random.nextInt(1000);
-    			//현재 인덱스에 값 제거
-            	rightSleepTimeList.remove(countRight.get()-1);
-                pressRightTimeList.remove(countRight.get()-1);
-                //현재 인덱스에 랜덤값 삽입
-				rightSleepTimeList.add(countRight.get()-1, rightSleepTime);
-				pressRightTimeList.add(countRight.get()-1, pressRightTime);
-            	
-            	//랜덤한 시간 생성후 리스트에 저장
+    			//현재 index-1에 랜덤값 set
+            	rightSleepTimeList.set(countRight.get()-1, rightSleepTime);
+                pressRightTimeList.set(countRight.get()-1, pressRightTime);
+                
+                //랜덤한 시간 생성후 리스트에 저장
     			rightSleepTime = random.nextInt(1000);
     			pressRightTime = random.nextInt(1000);
-    			//현재 인덱스에 값 제거
-            	rightSleepTimeList.remove(countRight.get());
-                pressRightTimeList.remove(countRight.get());
-                //현재 인덱스에 랜덤값 삽입
-				rightSleepTimeList.add(countRight.get(), rightSleepTime);
-				pressRightTimeList.add(countRight.get(), pressRightTime);
+    			//현재 index에 랜덤값 set
+            	rightSleepTimeList.set(countRight.get(), rightSleepTime);
+                pressRightTimeList.set(countRight.get(), pressRightTime);
             }
             countRight.set(0);
         }
@@ -288,22 +282,16 @@ public class MainLearning extends JFrame{
 				//랜덤한 시간 생성후 리스트에 저장
     			upSleepTime1 = random.nextInt(500);
     			upSleepTime2 = random.nextInt(500);
-    			//현재 인덱스 값 제거
-				upSleepTimeList1.remove(countUp.get()-1);
-				upSleepTimeList2.remove(countUp.get()-1);
-				//현재 인덱스에 랜덤값 삽입
-				upSleepTimeList1.add(countUp.get()-1, upSleepTime1);
-				upSleepTimeList2.add(countUp.get()-1, upSleepTime2);
+    			//현재 인덱스-1에 랜덤값 set
+				upSleepTimeList1.set(countUp.get()-1, upSleepTime1);
+				upSleepTimeList2.set(countUp.get()-1, upSleepTime2);
 				
 				//랜덤한 시간 생성후 리스트에 저장
     			upSleepTime1 = random.nextInt(500);
     			upSleepTime2 = random.nextInt(500);
-    			//현재 인덱스 값 제거
-				upSleepTimeList1.remove(countUp.get());
-				upSleepTimeList2.remove(countUp.get());
-				//현재 인덱스에 랜덤값 삽입
-				upSleepTimeList1.add(countUp.get(), upSleepTime1);
-				upSleepTimeList2.add(countUp.get(), upSleepTime2);
+    			//현재 인덱스에 랜덤값 set
+				upSleepTimeList1.set(countUp.get()-1, upSleepTime1);
+				upSleepTimeList2.set(countUp.get()-1, upSleepTime2);	
 			}
 			countUp.set(0);
 		}

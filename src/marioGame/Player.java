@@ -40,12 +40,6 @@ public class Player extends JLabel implements Moveable {
 		initNormal();
 		initSetting();
 	}
-	
-	//캐릭터 리셋
-	public void resetPlayer() {
-		initNormal();
-		initSetting();
-	}
 
 	//일반 마리오
 	private void initNormal() {
@@ -160,7 +154,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public synchronized void left() {
+	public void left() {
 		setIcon(playerL);
 		lastLR = true;
 		left = true;
@@ -208,7 +202,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public synchronized void right() {
+	public void right() {
 		setIcon(playerR);
 		lastLR = false;
 		right = true;
@@ -254,7 +248,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public synchronized void up() {
+	public void up() {
 		up = true; 
 		upThread = new Thread(()->{
 			setIcon(playerJR);
@@ -290,7 +284,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	@Override
-	public synchronized void down() {
+	public void down() {
 		if (!down) {
 			down = true;
 			downThread = new Thread(()->{
