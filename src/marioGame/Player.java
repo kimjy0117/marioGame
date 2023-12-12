@@ -2,7 +2,7 @@ package marioGame;
 
 import javax.swing.*;
 
-public class Player extends JLabel implements Moveable {
+public class Player extends JLabel {
 	//위치
 	private int x;
 	private int y;
@@ -152,8 +152,7 @@ public class Player extends JLabel implements Moveable {
 			this.status = 2;
 		transPlayer();
 	}
-
-	@Override
+	
 	public void left() {
 		setIcon(playerL);
 		lastLR = true;
@@ -201,7 +200,6 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
-	@Override
 	public void right() {
 		setIcon(playerR);
 		lastLR = false;
@@ -247,7 +245,6 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
-	@Override
 	public void up() {
 		up = true; 
 		upThread = new Thread(()->{
@@ -283,7 +280,6 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
-	@Override
 	public void down() {
 		if (!down) {
 			down = true;

@@ -3,7 +3,7 @@ package marioGame;
 import javax.swing.*;
 import java.awt.*;
 
-public class Enemy extends JLabel implements Moveable {
+public class Enemy extends JLabel {
 	//위치
 	private int x;
 	private int y;
@@ -59,7 +59,6 @@ public class Enemy extends JLabel implements Moveable {
 		moving();
 	}
 	
-	@Override
 	public void left() {
 		setIcon(enemyL);
 		lastLR = true;
@@ -91,7 +90,6 @@ public class Enemy extends JLabel implements Moveable {
 		leftThread.start();
 	}
 
-	@Override
 	public void right() {
 		setIcon(enemyR);
 		lastLR = false;
@@ -123,12 +121,7 @@ public class Enemy extends JLabel implements Moveable {
 		});
 		rightThread.start();
 	}	
-	@Override
-	public void up() {}
 
-	@Override
-	public void down() {}
-	
 	private void moving() {
 		new Thread(()->{
 			while(player.isStatus()>0) {
