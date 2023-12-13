@@ -39,7 +39,6 @@ public class EndingCom extends JFrame{
 	private void init() {
 		//프레임 설정
 		setTitle("GAME ENDING (COM)");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 800);
 		setResizable(false);
 		setContentPane(backPanel);

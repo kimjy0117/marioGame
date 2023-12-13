@@ -402,25 +402,25 @@ public class MainLearning extends JFrame{
 				writer.newLine();
 				writer.write("rightSleepTimeList");
 				writer.newLine();
-				for(int i=0; i<rightSleepTimeList.size(); i++) {
+				for(int i=0; i<countRight.get(); i++) {
 					writer.write(Integer.toString(rightSleepTimeList.get(i)));
 					writer.newLine();
 				}
 				writer.write("pressRightTimeList");
 				writer.newLine();
-				for(int i=0; i<pressRightTimeList.size(); i++) {
+				for(int i=0; i<countRight.get(); i++) {
 					writer.write(Integer.toString(pressRightTimeList.get(i)));
 					writer.newLine();
 				}
 				writer.write("upSleepTimeList1");
 				writer.newLine();
-				for(int i=0; i<upSleepTimeList1.size(); i++) {
+				for(int i=0; i<countUp.get(); i++) {
 					writer.write(Integer.toString(upSleepTimeList1.get(i)));
 					writer.newLine();
 				}
 				writer.write("upSleepTimeList2");
 				writer.newLine();
-				for(int i=0; i<upSleepTimeList2.size(); i++) {
+				for(int i=0; i<countUp.get(); i++) {
 					writer.write(Integer.toString(upSleepTimeList2.get(i)));
 					writer.newLine();
 				}

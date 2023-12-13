@@ -35,13 +35,11 @@ public class Ending extends JFrame{
 		this.playTime = playTime;
 		this.deathCount = deathCount;
 		init();
-		System.out.println(playTime);
 	}
 	
 	private void init() {
 		//프레임 설정
 		setTitle("GAME ENDING (USER)");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 800);
 		setResizable(false);
 		setContentPane(backPanel);
